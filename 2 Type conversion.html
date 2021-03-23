@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type conversion</title>
+</head>
+
+<body>
+    <script>
+        "use strict"; globalThis.__codeBoxId = "zanvac14e8";
+
+// 字符转换
+        //调用 String(value) 来将 value 转换为字符串类型
+        let value = 1;
+        console.log("转换前的类型:" + typeof value);//number
+        value = String(value);
+        console.log("转换后:" + typeof value);//string
+// 数字型转换
+        console.log("3" + "3");//33
+        console.log("3" - "3");//0
+        console.log("3" * "3");//9
+        console.log("3" / "3");//1
+        // 会将除了加法以外的字符转换为number型后进行计算
+
+        //调用Number(value) 将 value 转换为 number 类型。
+        let str = "123";
+        console.log("转换前的类型:" + typeof str);//string
+        str = Number(str);
+        console.log("转换后:" + typeof str);//number
+        //Number(value)转换其他类型
+        console.log("char:" + Number("testtest"));//NaN
+        console.log("true:" + Number(true));//1
+        console.log("false:" + Number(false));//0
+        console.log("null:" + Number(null));//0
+        //使用一元运算符 + 转换为数字 效果和Number(value)相同
+        let conversion = "404";
+        console.log("用 + 转换数字字符串为："+typeof +conversion);
+
+//布尔型转换
+        console.log("1:"+Boolean(1));//true
+        console.log("0:"+Boolean(0));//flase
+        //非空的字符串总是 true
+        console.log("空格"+Boolean(" "));true
+        
+
+
+    </script>
+</body>
+
+</html>

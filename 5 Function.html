@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        // function plus(a,b) {
+        //     return a + b;
+        // }
+        // let a = +prompt("enter a number",);
+        // let b = +prompt("enter a number",);
+        // alert(plus(a,b));
+
+        function checkAge(age) {
+            return age>18 ? true : "balabala";
+        }
+        console.log(checkAge(19));
+
+        function checkAge2(age) {
+            return age>18 || "no 18";
+        }
+        console.log(checkAge2(12));
+
+        function min(a, b) {
+            return a>b ? a:b;
+        }
+        console.log(min(2,32));
+
+        // function pow(x, n) {
+        //     return x ** n;
+        // }
+        // let x = +prompt("Enter a number");
+        // let n = +prompt("Enter a number");
+        // pow(x,n);
+        // console.log(pow(x,n));
+
+        function ask(question, yes, no) {
+            if(confirm(question)) yes()
+            else no();
+        }
+        function showYes() {
+            console.log("Is YES!");
+        }
+        function showNo() {
+            console.log("Is NO!");
+        }
+        ask("YES or NO?",showYes,showNo);
+
+        // let func = (funA, funB) => funA+funB;
+        // let funA = +prompt("Enter a number");
+        // let funB = +prompt("Enter a number");
+        // console.log(func(funA, funB));
+
+        let sayHello = () => console.log("Hello!!");
+        sayHello();
+
+        let ask2 = (question, isYes, isNo) => confirm(question) ? isYes() : isNo();
+
+        ask2(
+            "YES OR NO 2",
+            () => console.log("isYES"),
+            () => console.log("isNO")
+        );
+        function Haha(name) {
+            this.name = name;
+        }
+        let haha = new Haha("NAME");
+        console.log(haha.name);
+
+        let Object = {};
+
+        function A() {
+            return Object;
+        }
+        function B() {
+            return Object;
+        }
+        console.log(new A());
+        console.log(new B());
+        console.log(new A()==new B());
+// 使用构造函数做计算
+        function Calculator() {
+            this.read = function() {
+                this.numA = +prompt("Enter a number A");
+                this.numB = +prompt("Enter a number B");
+            };
+            this.sum  = function() {
+                return this.numA + this.numB;
+            };
+            this.mul = function() {
+                return this.numA * this.numB;
+            };
+        }
+        let objCalculator = new Calculator();
+        objCalculator.read();
+        console.log(objCalculator.sum());
+        console.log(objCalculator.mul());
+// 构造函数创建初始值和用户输入值总和
+        function Accumulator(value) {
+            this.value = value;
+            this.read = ()=>{
+                return this.value += +prompt("Enter a number will plus value");
+            }
+        }        
+        let accumulator = new Accumulator(1);
+        console.log(accumulator.read());
+</script>
+</body>
+</html>

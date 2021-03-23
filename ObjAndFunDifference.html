@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difference</title>
+</head>
+<body>  
+    <p>计算（使用对象）</p>
+    <input type="text" name="numA" id="numA">
+    <span>+ / *</span>
+    <input type="text" name="numB" id="numB">
+    <input type="button" name="btn" id="btn" value="计算">
+    <p>相加：</p><span id="pResult"></span>
+    <p>相乘：</p><span id="mResult"></span>
+
+    <p>计算（使用构造函数）</p>
+    <input type="text" name="newNumA" id="newNumA">
+    <span>+ / *</span>
+    <input type="text" name="newNumB" id="newNumB">
+    <input type="button" name="newBtn" id="newBtn" value="计算">
+    <p>相加：</p><span id="newPResult"></span>
+    <p>相乘：</p><span id="newMResult"></span>
+    <script>
+        "use strict"
+        let btn = document.getElementsByTagName('input')[2];
+        let newBtn = document.getElementsByTagName('input')[5];
+        let pResult = document.getElementById('pResult');
+        let mResult = document.getElementById('mResult');
+
+
+        let newPResult = document.getElementById('newPResult');
+        let newMResult = document.getElementById('newMResult');
+        btn.onclick= ()=> {
+            let inNumA = document.getElementsByTagName('input')[0].value;
+            let inNumB = document.getElementsByTagName('input')[1].value;
+            console.log(inNumA);
+            console.log(inNumB);
+            // 用对象写
+            let objcalculator = {
+                read(){
+                    this.numA = +inNumA;
+                    this.numB = +inNumB;
+                },
+                sum(){
+                    return this.numA + this.numB;
+                },
+                mul(){
+                    return this.numA * this.numB;
+                }
+            }
+            objcalculator.read();
+            pResult.innerHTML = objcalculator.sum();
+            mResult.innerHTML = objcalculator.mul();
+            
+            console.log(objcalculator.sum());
+            // document.getElementById("numA").value = null;
+            numA.value = null;
+            numB.value = null;
+        };
+        newBtn.onclick= () =>{
+            let inNumA = document.getElementsByTagName('input')[3].value;
+            let inNumB = document.getElementsByTagName('input')[4].value;
+            // 构造函数写
+            function Calculator() {
+                this.read = ()=>{
+                    this.numA = +inNumA;
+                    this.numB = +inNumB;
+                };
+                this.sum = ()=>{
+                    return this.numA + this.numB;
+                };
+                this.mul = ()=>{
+                    return this.numA * this.numB;
+                }
+            }
+            let calculator = new Calculator();
+            calculator.read();
+            newPResult.innerHTML = calculator.sum();
+            newMResult.innerHTML = calculator.mul();
+            newNumA.value = null;
+            newNumB.value = null;
+        }
+
+    </script>
+</body>
+</html>

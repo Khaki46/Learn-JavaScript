@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        // 编写一个函数 sumTo(n) 计算 1 + 2 + ... + n 的和。
+        // 用三种方式实现：
+        // 1 使用循环。
+        // 2 使用递归，对 n > 1 执行 sumTo(n) = n + sumTo(n-1)。
+        // 3 使用 等差数列 求和公式.
+        let sum = 0;
+        function sumTo(n) {
+            // 循环
+
+            // for (let index = 0; index <= n; index++) {
+            //     sum+=index;
+            //     console.log(index);
+            // }
+            // return sum;
+
+            // 递归
+
+            // if(n<=1){
+            //     return 1;
+            // }else{
+            //     return n+sumTo(n-1);
+            // }
+
+            // 等差数列求和公式
+            return n * (n+1)/2;
+        }
+        console.log(sumTo(100));
+
+        // 计算阶乘 任务是编写一个函数 factorial(n) 使用递归调用计算 n!。
+        function factorial(n) {
+            // if(n<=1){
+            //     return 1;
+            // }else{
+            //     return n*factorial(n-1);
+            // }
+
+            return n>=1 ? n*factorial(n-1):1;
+        }
+        console.log(factorial(5));
+
+        // 斐波那契数
+        function fib(n) {
+            return n<=1 ? n : fib(n-1)+fib(n-2);
+
+        }
+        console.log(fib(7));
+        // Rest参数与Spread语法
+        // Rest参数 ...
+        function sumAll(...ages){
+            let sum = 0;
+            for (const age of ages) {
+                sum+=age;
+            }
+            return sum;
+        }
+        console.log(sumAll(1,2,3,4,5));
+
+        function showName(firstName, lastName, ...titles) {
+            console.log(firstName+" "+lastName);
+            console.log(titles[0]);
+            console.log(titles[1]);
+            console.log(titles.length);
+        }
+        showName("Tim","Cook","title0","title1");
+        // Spread语法
+        let numArr = [
+            1,
+            5,
+            4,
+            -2,
+            9
+        ]
+        let numArr2 = [
+            23,
+            45,
+            -45,
+            34,
+            65
+        ]
+        console.log(Math.max(...numArr,...numArr2));
+        console.log(Math.min(...numArr,...numArr2));
+
+        // 编写一个像 sum(a)(b) = a+b 这样工作的 sum 函数。
+        function sumDouble(a) {
+            return function(b){
+                return a+b;
+            }
+        }
+        console.log(sumDouble(1)(2));
+        // arr.filter(inBetween(3,6)) —— 只挑选范围在 3 到 6 的值。
+        let arr = [1, 2, 3, 4, 5, 6, 7];
+
+        function inBetween(a,b) {
+            return function(x){
+                return x>=a && x<=b;
+            }
+        }
+        console.log(arr.filter(inBetween(3,6)));
+        // arr.filter(inArray([1,2,3])) —— 只挑选与 [1,2,3] 中的元素匹配的元素。
+        function inArray(needArr) {
+            return function(x){
+                return needArr.includes(x);
+            }
+        }
+        console.log(arr.filter(inArray([1,2,12])));
+        // 通过byField(fieldName)排序
+        let users = [
+            { name: "John", age: 20, surname: "Johnson" },
+            { name: "Pete", age: 18, surname: "Peterson" },
+            { name: "Ann", age: 19, surname: "Hathaway" }
+        ];
+        function byField(fieldName) {
+            return (a,b) => a[fieldName] > b[fieldName] ? 1:-1;
+        }
+        console.log(users.sort(byField('age')));
+        // bind
+        let userJ = {
+            firstName:"John"
+        };
+        function func(){
+            console.log(this.firstName);
+        }
+        let funUser = func.bind(userJ);
+        funUser();
+
+        //get set 
+        let fullUser = {
+            name: "John",
+            surname: "Smith",
+
+            get fullName(){
+                return `${this.name} ${this.surname}`;
+            },
+
+            set fullName(value){
+                [this.name, this.surname] = value.split(' ');
+            }
+        };
+        fullUser.fullName = "Tim Cook"
+        console.log(fullUser.fullName);
+        // 访问器描述符
+        // 没加
+        for (const key in fullUser) {
+            console.log(key);
+        }
+        
+        // 加访问器
+        let userDP = {
+            name: "John",
+            surname: "Smith",
+        };
+
+        Object.defineProperty(userDP,"fullName",{
+            get (){
+                return `${this.name} ${this.surname}`;
+            },
+
+            set (value){
+                [this.name, this.surname] = value.split(' ');
+            }
+        });
+
+        console.log(userDP.fullName);
+        for (let key in userDP) {
+            console.log(key);
+        }
+        
+        let head = {
+            glasses: 1
+        };
+
+        let table = {
+            pen: 3,
+            __proto__: head
+        };
+
+        let bed = {
+            sheet: 1,
+            pillow: 2,
+            __proto__: table
+        };
+
+        let pockets = {
+            money: 2000,
+            __proto__: bed
+        };  
+        console.log(pockets.pen);
+        
+        let hamster = {
+        stomach: [],
+
+        eat(food) {
+            this.stomach.push(food);
+        }
+        };
+
+        let speedy = {
+        __proto__: hamster,
+        stomach:[]
+        };
+
+        let lazy = {
+        __proto__: hamster,
+        stomach:[]
+        };
+
+        // 这只仓鼠找到了食物
+        speedy.eat("apple");
+        lazy.eat("banana")
+        console.log(speedy.stomach);                 
+        console.log(lazy.stomach);                 
+
+        let animal = {
+            eats : true,
+            sex : "man"
+        };
+        function Rabbit(name){
+            this.name = name;
+        }
+        Rabbit.prototype = animal;//把Rabbit的 [[Prototype]] 赋值为 animal”。
+        let rabbit = new Rabbit("White Rabbit");
+        console.log(rabbit.eats);
+        console.log(rabbit.sex);
+
+        // 任务
+        function WRRabbit() {
+            
+        }
+        WRRabbit.prototype = {
+            eats:true
+        };
+        let WRrabbit = new WRRabbit();
+        // WRRabbit.prototype.eats = false;
+        console.log(WRrabbit.eats);
+
+        // 原生的原型
+        let obj = {
+
+        };
+        console.log(obj);
+
+
+
+    </script>       
+</body>
+</html>

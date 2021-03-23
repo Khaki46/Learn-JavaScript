@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        let user = {
+            name : "mike",
+            age : 23,
+            "likes code" : true,
+        };
+        user.isAdmin = true;
+        console.log("name:"+user.name);
+        console.log("isAdmin:"+user.isAdmin);
+        delete user.isAdmin;
+        console.log(user.isAdmin);
+        console.log("likes code:"+user["likes code"]);
+        
+        function makeUser(name, age) {
+            return {
+                name:name,
+                age:age,
+            }
+        }
+        let funUser = makeUser("john",33);
+        console.log(funUser.name);
+        console.log("name" in funUser);
+
+        for (const key in user) {
+            console.log(key+":"+user[key]);
+        }
+        
+        let obj = {
+
+        }
+        function isEmpty(obj) {
+            for (const key in obj) {
+                    return false;
+            }
+            return true;
+        }
+        console.log(isEmpty(obj));
+
+        let sum = 0;
+        let salaries = {
+            John : 100,
+            Ann : 160,
+            pete : 130
+        }
+        for (const key in salaries) {
+            sum+=salaries[key];
+        }
+        console.log(sum);
+
+        let menu = {
+            width:200,
+            height:300,
+            title:"My menu"
+        };
+
+        for (const key in menu) {
+            if(typeof menu[key]=="number"){
+                menu[key]*=2;
+            }
+        }
+        console.log(menu); 
+
+        let newMenu = {};
+        for (const key in menu) {
+            newMenu[key]=menu[key];
+        }
+        console.log(newMenu);
+        // 对象做计算
+        let calculator = {
+            read(){
+                this.numa = +prompt("Enter a number");
+                this.numb = +prompt("Enter a number");
+            },
+            sum(){
+                return this.numa+this.numb;
+            },
+            mul(){
+                return this.numa*this.numb;
+            }
+        }
+        calculator.read();
+        console.log(calculator.sum());
+        console.log(calculator.mul());
+        let objSymbol = {
+            [Symbol.toPrimitive](hint){
+                if(hint == "number"){
+                    return 233;
+                }
+                if(hint == "string"){
+                    return "Hello";
+                }
+                return true;
+            }
+        }
+        console.log(+objSymbol);//233
+        console.log(`${objSymbol}`);
+        console.log(objSymbol);
+    </script>
+</body>
+</html>
