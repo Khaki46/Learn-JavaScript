@@ -146,7 +146,34 @@
                 }, this.precision);
             }
         }
+        // 静态属性和方法
+        class sttUser {
+            static staticMethod(){
+                console.log(this === sttUser);
+            }
+        }
+        sttUser.staticMethod();
 
+        class Article {
+            constructor(title, date){
+                this.title = title;
+                this.date = date;
+            }
+
+            static compare(articleA, articleB) {
+                return articleA.date - articleB.date;
+            }
+        }
+        let article = [
+            new Article("a",new Date(2019,1,1)),
+            new Article("b",new Date(2019,0,1)),
+            new Article("c",new Date(2019,11,1))
+
+        ];
+        article.sort(Article.compare);
+        for (const iterator of article) {
+            console.log(iterator.title);
+        }
     </script>
 </body>
 </html>
