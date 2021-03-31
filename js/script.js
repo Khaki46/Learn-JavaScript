@@ -57,3 +57,38 @@ console.log(person1.name);//来自实例
 console.log(person2.name);//来自原型
 console.log(person1);
 console.log(person2);
+console.log(person1.hasOwnProperty("name"));
+console.log(person2.hasOwnProperty("name"));//原型 false
+// __proto__ 继承
+let animal = {
+    eats: true
+};
+let rabbit = {
+    jumps: true
+};
+rabbit.__proto__ = animal;
+console.log(rabbit.eats);//true
+
+function Rabbit(name) {
+    this.name = name;
+}
+Rabbit.prototype = animal;//当创建一个new Rabbit 时把它的[[Prototype]] 赋值为 animal
+let rabbit2 = new Rabbit("Rabbit 2");//rabbit2.__proto__ = animal;
+console.log(rabbit2.eats);
+
+Function.prototype.defer = function(ms) {
+    let f = this;
+    console.log(f);
+    return function(...args) {
+      setTimeout(() => f.apply(this, args), ms);
+    }
+  };
+  
+  // check it
+  function f(a, b) {
+    alert( a + b );
+  }
+  
+  f.defer(1000)(1, 2); // 1 秒后显示 3
+  
+  
