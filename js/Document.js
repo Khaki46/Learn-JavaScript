@@ -1,5 +1,9 @@
+// 包含了滚动条
 console.log(`width:${window.innerWidth}`);
 console.log(`height:${window.innerHeight}`);
+// 不包含滚动条
+console.log("width:" + document.documentElement.clientWidth);
+console.log("height:" + document.documentElement.clientHeight);
 document.body.style.background = "pink";
 setTimeout(() => {
     document.body.style.background = "";
@@ -61,3 +65,6 @@ showNotification({
     console.log(example.offsetTop);
 console.log(example.offsetHeight);
 console.log(example.clientLeft);
+setInterval(() => {
+    console.log(example.scrollHeight  - example.scrollTop - example.clientHeight);
+}, 1000);

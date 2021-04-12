@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>changeBall</title>
+    <style>
+        #field {
+          width: 200px;
+          border: 10px groove black;
+          background-color: #00FF00;
+          position: relative;
+        }
+    
+        #ball {
+          position: absolute;
+        }
+      </style>    
+</head>
+<body>
+    <div id="field">
+        <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      </div>
+      <input type="submit" value="改变位置">
+      <input type="submit" value="复原">
+    <script>
+        let div = document.getElementById('field');
+        const ball = document.getElementById('ball');
+        const btnChange = document.querySelectorAll('input')[0];
+        const btnBack = document.querySelectorAll('input')[1];
+            function change() {
+                let midWidth = div.offsetWidth/2;
+                let midHeight = div.offsetHeight/2;
+
+                let ballWidth = ball.clientWidth;
+                let ballHeight = ball.clientHeight;
+
+                ball.style.left = midWidth-ballWidth+'px';
+                ball.style.top = midHeight-ballHeight+'px';
+            }
+            btnChange.addEventListener('click',change);
+            function recovery() {
+                ball.style.left ='0px';
+                ball.style.top ='0px';
+            }
+            btnBack.addEventListener('click',recovery);
+    </script>
+</body>
+</html>
